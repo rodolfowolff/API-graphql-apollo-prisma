@@ -6,6 +6,7 @@ const productTypeDef = gql`
   type Product {
     name: String
     createdAt: Date
+    sector: Sector
   }
 
   type AllProductsResult {
