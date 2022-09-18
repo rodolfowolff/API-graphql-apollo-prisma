@@ -1,7 +1,11 @@
 import { UserInputError } from "apollo-server";
 
 const Mutation = {
-  createProduct: async (_parent: any, args: any, context: any) => {
+  createProduct: async (
+    _parent: any,
+    args: { name: string; sectorId: number },
+    context
+  ) => {
     if (args.name === undefined || args.sectorId === undefined) {
       throw new UserInputError("Nome e setor são obrigatorios");
     }
@@ -12,18 +16,49 @@ const Mutation = {
       },
     });
 
-    if (checkProductExists) throw new UserInputError("Produto já cadastrado");
+    if (checkProductExists)
+      throw new UserInputError(`Produto ${args.name} já cadastrado`);
 
     await context.prisma.product.create({
       data: {
         name: args.name,
-        sectors: {
+        sector: {
           connect: { id: args.sectorId },
         },
       },
     });
 
-    return "Produto cadastrado com sucesso";
+    return `Produto ${args.name} cadastrado com sucesso`;
+  },
+  updateProduct: async (
+    _parent: any,
+    args: { id: number; name: string; sectorId: number },
+    context
+  ) => {
+    if (args.id === undefined) {
+      throw new UserInputError("ID do produto é obrigatorio");
+    }
+
+    if (args.name === undefined && args.sectorId === undefined) {
+      throw new UserInputError(
+        "Falta informar o dado para atualizar do produto"
+      );
+    }
+
+    await context.prisma.product.update({
+      where: {
+        id: args.id,
+      },
+      data: {
+        name: args.name,
+        updatedAt: new Date(),
+        sector: {
+          connect: { id: args.sectorId },
+        },
+      },
+    });
+
+    return "Produto atualizado com sucesso";
   },
 };
 

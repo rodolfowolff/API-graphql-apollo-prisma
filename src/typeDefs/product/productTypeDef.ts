@@ -20,6 +20,7 @@ const productTypeDef = gql`
 
   type Mutation {
     createProduct(name: String!, sectorId: Int!): String
+    updateProduct(id: Int!, name: String, sectorId: Int): String
   }
 `;
 
