@@ -60,6 +60,23 @@ const Mutation = {
 
     return "Produto atualizado com sucesso";
   },
+  deleteProduct: async (_parent: any, args: { id: number }, context) => {
+    if (args.id === undefined) {
+      throw new UserInputError("ID do produto é obrigatorio");
+    }
+
+    await context.prisma.product.update({
+      where: {
+        id: args.id,
+      },
+      data: {
+        active: false,
+        updatedAt: new Date(),
+      },
+    });
+
+    return "Produto desativado com sucesso";
+  },
 };
 
 export default Mutation;

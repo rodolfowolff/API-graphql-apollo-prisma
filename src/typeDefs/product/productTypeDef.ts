@@ -4,6 +4,7 @@ const productTypeDef = gql`
   scalar Date
 
   type Product {
+    id: Int
     name: String
     createdAt: Date
     sector: Sector
@@ -21,6 +22,7 @@ const productTypeDef = gql`
   type Mutation {
     createProduct(name: String!, sectorId: Int!): String
     updateProduct(id: Int!, name: String, sectorId: Int): String
+    deleteProduct(id: Int!): String
   }
 `;
 
