@@ -7,7 +7,7 @@ const Query = {
         },
       ],
       include: {
-        sector: true,
+        category: true,
       },
     });
 

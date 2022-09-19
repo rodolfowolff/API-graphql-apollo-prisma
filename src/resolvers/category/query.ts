@@ -1,9 +1,9 @@
 const Query = {
   getAllCategories: async (_parent: any, _args: any, context) => {
-    const findCategories = await context.prisma.categories.findMany();
+    const findCategories = await context.prisma.category.findMany();
 
     return {
-      sectors: findCategories,
+      categories: findCategories,
       total: findCategories.length,
     };
   },

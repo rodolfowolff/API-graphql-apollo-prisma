@@ -1,12 +1,13 @@
 import { UserInputError } from "apollo-server";
+import generateCode from "../../util/generateCode";
 
 const Mutation = {
   createProduct: async (
     _parent: any,
-    args: { name: string; sectorId: number },
+    args: { name: string; categoryId: number },
     context
   ) => {
-    if (args.name === undefined || args.sectorId === undefined) {
+    if (args.name === undefined || args.categoryId === undefined) {
       throw new UserInputError("Nome e setor são obrigatorios");
     }
 
@@ -22,8 +23,9 @@ const Mutation = {
     await context.prisma.product.create({
       data: {
         name: args.name,
-        sector: {
-          connect: { id: args.sectorId },
+        code: generateCode(6),
+        category: {
+          connect: { id: args.categoryId },
         },
       },
     });
@@ -32,14 +34,14 @@ const Mutation = {
   },
   updateProduct: async (
     _parent: any,
-    args: { id: number; name: string; sectorId: number },
+    args: { id: number; name: string; categoryId: number },
     context
   ) => {
     if (args.id === undefined) {
       throw new UserInputError("ID do produto é obrigatorio");
     }
 
-    if (args.name === undefined && args.sectorId === undefined) {
+    if (args.name === undefined && args.categoryId === undefined) {
       throw new UserInputError(
         "Falta informar o dado para atualizar do produto"
       );
@@ -52,8 +54,8 @@ const Mutation = {
       data: {
         name: args.name,
         updatedAt: new Date(),
-        sector: {
-          connect: { id: args.sectorId },
+        category: {
+          connect: { id: args.categoryId },
         },
       },
     });

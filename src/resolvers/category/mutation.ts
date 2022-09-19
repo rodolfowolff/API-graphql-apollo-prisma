@@ -6,7 +6,7 @@ const Mutation = {
       throw new UserInputError("Nome é obrigatorio!");
     }
 
-    const checkCategoryExists = await context.prisma.categories.findFirst({
+    const checkCategoryExists = await context.prisma.category.findFirst({
       where: {
         name: args.name,
       },
@@ -15,7 +15,7 @@ const Mutation = {
     if (checkCategoryExists)
       throw new UserInputError("Categoria já cadastrada");
 
-    await context.prisma.categories.create({
+    await context.prisma.category.create({
       data: {
         name: args.name,
       },
