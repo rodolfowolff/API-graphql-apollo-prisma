@@ -1,6 +1,6 @@
-import productTypeDef from './product/productTypeDef'
-import sectorTypeDef from './sector/sectorTypeDef'
+import productTypeDef from "./product/productTypeDef";
+import categoryTypeDef from "./category/categoryTypeDef";
 
-const typeDefs = [productTypeDef, sectorTypeDef]
+const typeDefs = [productTypeDef, categoryTypeDef];
 
-export default typeDefs
+export default typeDefs;

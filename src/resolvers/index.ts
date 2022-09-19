@@ -1,6 +1,6 @@
-import productResolver from './product'
-import sectorResolver from './sector'
+import productResolver from "./product";
+import categoryResolver from "./category";
 
-const resolvers = [productResolver, sectorResolver]
+const resolvers = [productResolver, categoryResolver];
 
-export default resolvers
+export default resolvers;
