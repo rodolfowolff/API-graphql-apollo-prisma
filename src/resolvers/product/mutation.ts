@@ -47,6 +47,15 @@ const Mutation = {
       );
     }
 
+    const checkProductExists = await context.prisma.product.findFirst({
+      where: {
+        name: args.name,
+      },
+    });
+
+    if (checkProductExists)
+      throw new UserInputError(`Produto ${args.name} já cadastrado`);
+
     await context.prisma.product.update({
       where: {
         id: args.id,
