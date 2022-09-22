@@ -83,6 +83,12 @@ npx prisma generate = gera o Prisma Client com base no schema.
 
 npx prisma migrate dev --name NOME_QUE_DESEJA_COLOCAR_PARA_ESSA_MIGRAÇÃO
 
+<!-- LINKS -->
+
+### Frontend link do projeto
+
+<a href="https://github.com/rodolfowolff/crud-vite">https://github.com/rodolfowolff/crud-vite</a>
+
 <!-- CONTACT -->
 
 ## 🐺 👨‍💻 Desenvolvedor
