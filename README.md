@@ -24,13 +24,7 @@ O projeto foi criado usando as tecnologias:
 
 A seguir estão as instruções para a instalação, configuração e uso do projeto.
 
-### Configurando
-
-1. Criar um arquivo na raiz do projeto, chamado [.env].
-
-2. Copiar o conteúdo do arquivo [.env.example] e setar com as configurações do seu banco de dados.
-
-### Instalando
+### Configuração
 
 1. Clonar o repositório
 
@@ -38,32 +32,33 @@ A seguir estão as instruções para a instalação, configuração e uso do pro
    git clone https://github.com/rodolfowolff/API-graphql-apollo-prisma
 ```
 
-2. Instalando os pacotes
+2. Configuração das variaveis de ambiente
 
-```sh
-    npm install
-```
+- Criar um arquivo na raiz do projeto, chamado [.env].
 
-3. Variaveis de ambiente, renomear o arquivo .env.exampĺe para .env e altere se necessario a url e porta da API
+- Copiar o conteúdo do arquivo [.env.example] e configurar os dados conforme seu banco de dados.
 
-```sh
-PORT=4000
-DATABASE_URL="postgresql://@usernameDB:userPasswordDB@urlDB:portDB/dbname?connection_limit=5&pool_timeout=20"
-```
-
-4. Comando do prisma para subir a tabela no banco de dados conforme o schema
+3. Comando do prisma para subir a tabela no banco de dados conforme o schema
 
 ```sh
 npx prisma db push
 ```
 
-5. Comando do prisma para gerar
+4. Comando do prisma para geração
 
 ```sh
 npx prisma generate
 ```
 
-6. Executar localmente
+### Instalação e execução
+
+1. Instalando os pacotes
+
+```sh
+    npm install
+```
+
+4. Executar localmente
 
 ```sh
     npm run dev
@@ -82,6 +77,25 @@ npx prisma db pull = banco de dados -> modelo esquema Prisma.
 npx prisma generate = gera o Prisma Client com base no schema.
 
 npx prisma migrate dev --name NOME_QUE_DESEJA_COLOCAR_PARA_ESSA_MIGRAÇÃO
+
+### Query exemplo do prisma
+
+```sh
+query GetAllProducts {
+  getAllProducts {
+    products {
+      name
+      id
+      code
+      createdAt
+      category {
+        id
+        name
+      }
+    }
+  }
+}
+```
 
 <!-- LINKS -->
 
