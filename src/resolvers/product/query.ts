@@ -3,6 +3,9 @@ import { UserInputError } from "apollo-server";
 const Query = {
   getAllProducts: async (_parent: any, _args: any, context) => {
     const findProducts = await context.prisma.product.findMany({
+      where: {
+        is_active: true,
+      },
       orderBy: [
         {
           createdAt: "desc",

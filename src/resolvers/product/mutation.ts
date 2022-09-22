@@ -81,7 +81,7 @@ const Mutation = {
         id: args.id,
       },
       data: {
-        active: false,
+        is_active: false,
         updatedAt: new Date(),
       },
     });
