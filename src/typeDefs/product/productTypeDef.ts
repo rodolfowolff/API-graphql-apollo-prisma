@@ -24,7 +24,12 @@ const productTypeDef = gql`
 
   type Mutation {
     createProduct(name: String!, quantity: Int!, categoryId: Int!): String
-    updateProduct(id: Int!, name: String, categoryId: Int): String
+    updateProduct(
+      id: Int!
+      name: String
+      quantity: Int!
+      categoryId: Int
+    ): String
     deleteProduct(id: Int!): String
   }
 `;

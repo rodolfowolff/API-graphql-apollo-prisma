@@ -39,14 +39,18 @@ const Mutation = {
   },
   updateProduct: async (
     _parent: any,
-    args: { id: number; name: string; categoryId: number },
+    args: { id: number; name: string; quantity: number; categoryId: number },
     context
   ) => {
     if (args.id === undefined) {
       throw new UserInputError("ID do produto é obrigatorio");
     }
 
-    if (args.name === undefined && args.categoryId === undefined) {
+    if (
+      args.name === undefined &&
+      args.quantity === undefined &&
+      args.categoryId === undefined
+    ) {
       throw new UserInputError(
         "Falta informar o dado para atualizar do produto"
       );
@@ -54,12 +58,11 @@ const Mutation = {
 
     const checkProductExists = await context.prisma.product.findFirst({
       where: {
-        name: args.name,
+        id: args.id,
       },
     });
 
-    if (checkProductExists)
-      throw new UserInputError(`Produto ${args.name} já cadastrado`);
+    if (!checkProductExists) throw new UserInputError(`Produto não encontrado`);
 
     await context.prisma.product.update({
       where: {
@@ -67,6 +70,7 @@ const Mutation = {
       },
       data: {
         name: args.name,
+        quantity: args.quantity,
         updatedAt: new Date(),
         category: {
           connect: { id: args.categoryId },
