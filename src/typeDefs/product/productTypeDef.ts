@@ -6,6 +6,7 @@ const productTypeDef = gql`
   type Product {
     id: Int
     name: String
+    quantity: Int
     code: String
     createdAt: Date
     category: Category
@@ -22,7 +23,7 @@ const productTypeDef = gql`
   }
 
   type Mutation {
-    createProduct(name: String!, categoryId: Int!): String
+    createProduct(name: String!, quantity: Int!, categoryId: Int!): String
     updateProduct(id: Int!, name: String, categoryId: Int): String
     deleteProduct(id: Int!): String
   }

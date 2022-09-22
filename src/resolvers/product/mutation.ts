@@ -4,11 +4,15 @@ import generateCode from "../../util/generateCode";
 const Mutation = {
   createProduct: async (
     _parent: any,
-    args: { name: string; categoryId: number },
+    args: { name: string; quantity: number; categoryId: number },
     context
   ) => {
-    if (args.name === undefined || args.categoryId === undefined) {
-      throw new UserInputError("Nome e setor são obrigatorios");
+    if (
+      args.name === undefined ||
+      args.quantity === undefined ||
+      args.categoryId === undefined
+    ) {
+      throw new UserInputError("Nome, quantidade e setor são obrigatorios");
     }
 
     const checkProductExists = await context.prisma.product.findFirst({
@@ -23,6 +27,7 @@ const Mutation = {
     await context.prisma.product.create({
       data: {
         name: args.name,
+        quantity: args.quantity,
         code: generateCode(6),
         category: {
           connect: { id: args.categoryId },
